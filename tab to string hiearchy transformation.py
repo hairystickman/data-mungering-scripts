@@ -3,7 +3,26 @@
 # of hiearchical keywords into Adobe Lightroom catalogue using LR transporter plugin.
 # based on original code by S. Pantos 2018
 
+# use from terminal from folder prompt:python this_script.py file_to_convert.txt
+# outputs to terminal
+# edit output with texteditor of your choice (e.g. Atom) and then open refine thus:
+
+# that needs cleaning in atom first.
+# - remove \n > to  >  \n\n to \n
+
+# load lines into open refine
+# explode out {} into synonyms column (blank down?)
+# merge records
+
+# Slice, pop off, extract last word from a hiearchy string
+# if (lastIndexOf(value," > ") > 0, slice(value,lastIndexOf(value," > ")+3),value)
+
+
 # No liability, no copyright. Made for specific use case.
+
+import sys
+filevar = sys.argv[1]
+
 
 def processLine(line, stack):
 	splitline = line.split("\t")
@@ -28,7 +47,7 @@ def processLine(line, stack):
 
 stack = []
 
-f = open('/Users/username/folder/keywords.txt', 'r')	//rename accordingly
+f = open(filevar, 'r')
 for line in f:
     stack = processLine(line, stack)
 processLine("", stack)

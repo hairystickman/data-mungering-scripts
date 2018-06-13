@@ -8,14 +8,19 @@
 # edit output with texteditor of your choice (e.g. Atom) and then open refine thus:
 
 # that needs cleaning in atom first.
-# - remove \n > to  >  \n\n to \n
+# change \n > to  >
+# change \n\n to \n
 
-# load lines into open refine
-# explode out {} into synonyms column (blank down?)
-# merge records
-
-# Slice, pop off, extract last word from a hiearchy string
-# if (lastIndexOf(value," > ") > 0, slice(value,lastIndexOf(value," > ")+3),value)
+# load lines into open refine then use these saved actions:
+# openrefine-convert lightroom keywords lists.texteditor
+# or do this
+# explode out {} into synonyms column (make su reyou keep the column)
+# 	delete the first column
+# 	then (blank down on the first column)
+# 	cells -> merge multivalue cells
+#	slice, pop off, extract last word from a hiearchy string with:
+# 		if (lastIndexOf(value," > ") > 0, slice(value,lastIndexOf(value," > ")+3),value)
+#	move to first column
 
 
 # No liability, no copyright. Made for specific use case.

@@ -1,0 +1,82 @@
+[
+  {
+    "op": "core/column-split",
+    "description": "Split column Column 1 by separator",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "Column 1",
+    "guessCellType": true,
+    "removeOriginalColumn": false,
+    "mode": "separator",
+    "separator": " > {",
+    "regex": false,
+    "maxColumns": 0
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Column 1 2 to synonym",
+    "oldColumnName": "Column 1 2",
+    "newColumnName": "synonym"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Column 1 1 to hierarchy",
+    "oldColumnName": "Column 1 1",
+    "newColumnName": "hierarchy"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column synonym using expression grel:value.replace(\"}\",\"\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "synonym",
+    "expression": "grel:value.replace(\"}\",\"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column Column 1",
+    "columnName": "Column 1"
+  },
+  {
+    "op": "core/blank-down",
+    "description": "Blank down cells in column hierarchy",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "hierarchy"
+  },
+  {
+    "op": "core/multivalued-cell-join",
+    "description": "Join multi-valued cells in column synonym",
+    "columnName": "synonym",
+    "keyColumnName": "hierarchy",
+    "separator": ";"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column keyword at index 1 based on column hierarchy using expression grel:if (lastIndexOf(value,\" > \") > 0, slice(value,lastIndexOf(value,\" > \")+3),value)",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "keyword",
+    "columnInsertIndex": 1,
+    "baseColumnName": "hierarchy",
+    "expression": "grel:if (lastIndexOf(value,\" > \") > 0, slice(value,lastIndexOf(value,\" > \")+3),value)",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-move",
+    "description": "Move column keyword to position 0",
+    "columnName": "keyword",
+    "index": 0
+  }
+]

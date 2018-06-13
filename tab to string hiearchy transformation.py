@@ -1,5 +1,9 @@
 # python script processing tabbed hierarchy into lightroom ">" notation
-# original code by S. Pantos
+# Can be used in conjunction with open refine or a database structure to allow clean import
+# of hiearchical keywords into Adobe Lightroom catalogue using LR transporter plugin.
+# based on original code by S. Pantos 2018
+
+# No liability, no copyright. Made for specific use case.
 
 def processLine(line, stack):
 	splitline = line.split("\t")
@@ -24,7 +28,7 @@ def processLine(line, stack):
 
 stack = []
 
-f = open('/Users/hairyfreak/Desktop/keywords.txt', 'r')
+f = open('/Users/username/folder/keywords.txt', 'r')	//rename accordingly
 for line in f:
     stack = processLine(line, stack)
 processLine("", stack)

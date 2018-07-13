@@ -1,3 +1,6 @@
+#takes a lightroom formatted list thing > thing_child {things nickname} and explodes it into tab spaced format for lightroom.
+#start by using custom exporter to export just those 2 columns from openrefine master sheet.
+
 [
   {
     "op": "core/column-split",

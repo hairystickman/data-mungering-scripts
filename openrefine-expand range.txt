@@ -1,0 +1,7 @@
+Python snippet for  automatically explode a range of numbers defined by upper and lower bounds.
+
+Use in cell transform
+
+
+
+return str(range(int(value.split("-")[0]),int(value.split("-")[1]))).replace(", ",";").replace("[","").replace("]","") + ";" + str(int(value.split("-")[1]))

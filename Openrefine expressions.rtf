@@ -5,7 +5,7 @@
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c14118\c15294\c16078;\cssrgb\c93725\c94118\c94510;
 }
 {\info
-{\author gapantos}}\paperw11900\paperh16840\margl1440\margr1440\vieww15660\viewh10020\viewkind0
+{\author gapantos}}\paperw11900\paperh16840\margl1440\margr1440\vieww18340\viewh19440\viewkind0
 \deftab720
 \pard\pardeftab720\sl280\partightenfactor0
 
@@ -13,28 +13,51 @@
 IMPORTANT!! don\'92t delete words split into multi cell value as it deletes subsequent values!! Use space instead\
 \pard\pardeftab720\sl280\partightenfactor0
 
-\b0 \cf2 then use value.replace("; ;",";") to correct the extra spaces\
-(nb unsure, may not be but to be sure)
+\b0 \cf2 then use remove concurrent whitespace later.\
+Also. when splitting by space to extract words from free text make sure to remove double spaces first.\
+if you don't check for blank cells on your expanded column and put something (like &) in them. Can be dropped later.\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\b \cf2 \
+Reminder on removing duplicate rows
+\b0 \
+Make sure the index field is at the front.\
+Sort alphabetically and apply sort.\
+Make sure you are in 'records' view\
+Blank down\
+Facet by blank. In records view it will treat the blank, and the one above together as a blank.\
+Check other fields to make sure it's correct (if not, undo and think again)\
+if they are, change to 'rows' view and remove all matching rows
 \b \
 \
 \
 Combining columns example.\
-Use when adding column based on another.\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\b0 \cf2 Use when adding column based on another.\
+Needed to overcome pernicious issue of null returned if one of 2 columns to be joined is blank. \
+\pard\pardeftab720\sl280\partightenfactor0
+
+\b \cf2 \
+Alternative to the below formula is to use the transpose commands.\
 \
+\pard\pardeftab720\sl280\partightenfactor0
+
+\b0 \cf2 1st Example adds the artefact photograph category to current column and then any additional keywords:
+\b \
 
 \b0 "artefact (photograph);" + value + if ( cells["Other keywords"] != null , ";" + cells["Other keywords"].value , "")\
 \
-\
 if(value !=null, if(cells["
-\i \cf2 description reduced
-\i0 \cf2 "].value != null, value + ";" + cells["
-\i \cf2 description reduced
-\i0 \cf2 "].value, value), if(cells["
-\i \cf2 description reduced
-\i0 \cf2 "].value != null, cells["
-\i \cf2 description reduced
-\i0 \cf2 "].value,''))\
-\
+\i description reduced
+\i0 "].value != null, value + ";" + cells["
+\i description reduced
+\i0 "].value, value), if(cells["
+\i description reduced
+\i0 "].value != null, cells["
+\i description reduced
+\i0 "].value,''))\
 \
 \
 \
@@ -56,9 +79,19 @@ value.replace(/^\\./,\'92\'92)\
 value.replace(/\\./,\'92\'92)\
 \
 \
-\
 
-\b removing duplicates in string list in column cells.\
+\b Checking if a description has the root of another description (e.g. a description has been augmented by other info at some point)\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\b0 \cf2 if(startsWith(toLowercase(value),toLowercase(cells["description"].value)),substring(value,length(cells["description"].value)),value)\
+\
+can also use 'contains' and indexOf and for similar actions. \
+This comes will flag up any major changes and 'fail' with changed spelling (but not capitalisation) for inspection, or otherwise leave only the remainder diff.\
+\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\b \cf2 removing duplicates in string list in column cells.\
 In Jython
 \b0 \
 \pard\pardeftab720\partightenfactor0
@@ -86,4 +119,13 @@ https://stackoverflow.com/questions/15419080/openrefine-remove-duplicates-from-l
 
 \b \cf2 facet by Custom number range (uses custom text facet)
 \b0 \
-if(value < 300157,if (value > 300135, true,false) ,false )}
+if(value < 300157,if (value > 300135, true,false) ,false )\
+\
+
+\b pad numbers with leading zeros
+\b0 \
+use python and zfill function.\
+e.g.\
+2014-23 -> 2014-0023\
+return value.split("-")[0] + "-" + str(value.split("-")[1]).zfill(4)\
+}

@@ -1,0 +1,5 @@
+python/jython 
+pop off or return second last value in an array.
+
+return value.split(" > ")[-2]
+

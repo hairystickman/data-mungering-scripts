@@ -1,4 +1,4 @@
-Matching up photos that have been renamed inconsistently based image metadata.
+Matching up photos that have been renamed inconsistently based on image metadata.
 
 requirements:
 Exported metadata from Lightroom et al from both groups of images to be paired containing the following:

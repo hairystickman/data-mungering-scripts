@@ -14,8 +14,7 @@
 # load lines into open refine then use these saved actions:
 # openrefine-convert lightroom keywords lists.texteditor
 # or do this
-# explode out {} into synonyms column (make su reyou keep the column)
-# 	delete the first column
+# explode out {} into synonyms column (make sure you keep the column)
 # 	then (blank down on the first column)
 # 	cells -> merge multivalue cells
 #	slice, pop off, extract last word from a hiearchy string with:
@@ -24,6 +23,7 @@
 
 
 # No liability, no copyright. Made for specific use case.
+# Python 2.x needs updating to Python 3.6 Nov. 2018
 import sys
 filevar = sys.argv[1]  							# get file to parse from terminal
 

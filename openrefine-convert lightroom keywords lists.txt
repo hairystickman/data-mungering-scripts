@@ -1,4 +1,4 @@
-#takes a lightroom formatted list thing > thing_child {things nickname} and explodes it into tab spaced format for lightroom.
+#takes a lightroom formatted list thing > thing_child {things nickname} and explodes it into tab spaced format for with keyword | hierarchy columns for use in LR and OR reconciling.
 #start by using custom exporter to export just those 2 columns from openrefine master sheet.
 
 [

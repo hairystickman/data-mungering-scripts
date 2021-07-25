@@ -1,7 +1,12 @@
 Python snippet for  automatically explode a range of numbers defined by upper and lower bounds.
 
-Use in cell transform
+# Use in cell transform
 
+# note that for some reason the range-function will only provide the numbers from first to penultimate when given 2 numbers.
+# eg. given 1-5
+# split the line on '-' to give 1 and 5 then do
+# range(1,5) will give 1,2,3,4. 
+# 5 needs to be added to the end. 
 
 
 return str(range(int(value.split("-")[0]),int(value.split("-")[1]))).replace(", ",";").replace("[","").replace("]","") + ";" + str(int(value.split("-")[1]))
